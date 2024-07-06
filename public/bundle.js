@@ -7,6 +7,10 @@ const productoImagen = producto.querySelector('.producto__imagen');
 // obtenemos las thumbs del producto
 const thumbs = producto.querySelector('.producto__thumbs');
 
+// Obtenemos la parte de la selección de color
+const propiedadColor = producto.querySelector('#propiedad-color');
+
+// FUNCIONALIDAD DE LAS THUMBSNAILS
 // Se crea un evento click a las thumbs
 thumbs.addEventListener('click', (e) => {
     // Si el elemento dentro de thumbs contiene la etiqueta "IMG"
@@ -20,5 +24,13 @@ thumbs.addEventListener('click', (e) => {
     
         // Se actualiza la imagen de la que se le dio click en los thumbs
         productoImagen.src = `./img/tennis/${nombreImagen}`;
+    }
+});
+
+// Se crea un evento click a la selección de color
+propiedadColor.addEventListener('click', (e) => {
+    // Si el elemento seleccionado es de tipo INPUT
+    if(e.target.tagName === 'INPUT') {
+        productoImagen.src = `./img/tennis/${e.target.value}.jpg`;
     }
 });
