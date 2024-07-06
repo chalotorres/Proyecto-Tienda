@@ -8,6 +8,13 @@ const thumbs = producto.querySelector('.producto__thumbs')
 // Obtenemos la parte de la selección de color
 const propiedadColor = producto.querySelector('#propiedad-color');
 
+// obtenemos el botón de Incrementar cantidad
+const btnIncrementarCantidad = producto.querySelector('#incrementar-cantidad'); 
+// obtenemos el botón de Disminuir cantidad
+const btnDisminuirCantidad = producto.querySelector('#disminuir-cantidad'); 
+// obtenemos el input de la cantidad
+const inputCantidad = producto.querySelector('#cantidad');
+
 // FUNCIONALIDAD DE LAS THUMBSNAILS
 // Se crea un evento click a las thumbs
 thumbs.addEventListener('click', (e) => {
@@ -25,10 +32,26 @@ thumbs.addEventListener('click', (e) => {
     }
 });
 
+// FUNCIONALIDAD DE LA PROPIEDAD DE COLOR
 // Se crea un evento click a la selección de color
 propiedadColor.addEventListener('click', (e) => {
     // Si el elemento seleccionado es de tipo INPUT
     if(e.target.tagName === 'INPUT') {
         productoImagen.src = `./img/tennis/${e.target.value}.jpg`;
+    }
+});
+
+// Se crea el evento para el botón de aumentar cantidad
+btnIncrementarCantidad.addEventListener('click', (e) => {
+    // De la cantidad que hay en el input se le suma 1 por cada click que se haga
+    inputCantidad.value = parseInt(inputCantidad.value) + 1;
+});
+
+// Se crea el evento para el botón de disminuir cantidad
+btnDisminuirCantidad.addEventListener('click', (e) => {
+    // Si el input es diferente de 0 (para evitar cantidades negativas)
+    if(inputCantidad.value !== '0') {
+    // De la cantidad que hay en el input se le resta 1 por cada click que se haga
+    inputCantidad.value = parseInt(inputCantidad.value) - 1;
     }
 });
