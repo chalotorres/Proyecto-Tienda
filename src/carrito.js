@@ -1,3 +1,6 @@
+// Importación de los datos de la "BD"
+import data from './data/productos.js';
+
 // Se obtienen todos los elementos que tienen la acción de abrir carrito
 const botonesAbrirCarrito = document.querySelectorAll('[data-accion="abrir-carrito"]');
 // Se obtienen todos los elementos que tienen la acción de cerrar carrito
@@ -8,6 +11,8 @@ const btnAgregarCarrito = document.getElementById('agregar-al-carrito');
 const producto = document.getElementById("producto");
 // Arreglo que contiene los productos del carrito
 const carrito = [];
+// Clase que de formato al tipo de moneda que se maneja
+const formatearMoneda = new Intl.NumberFormat('es-MX', {style: 'currency', currency: 'MXN'});
 
 // variable que obtiene la ventana del carrito
 const ventanaCarrito = document.getElementById('carrito');
@@ -23,6 +28,14 @@ const renderCarrito = () => {
 
     // Iteramos sobre cada producto para agregarlo al carrito y mostrarlo
     carrito.forEach((productoCarrito) => {
+        // Se busca el producto con su ID de la BD
+        data.productos.forEach((productoBD) => {
+            if(productoBD.id === productoCarrito.id) {
+                // Se actualiza el productoCarrito con el precio
+                productoCarrito.precio = productoBD.precio;
+            }
+        });
+        
         // Se obtiene el url del thumb del producto seleccionado
         let thumbSrc = producto.querySelectorAll('.producto__thumb-img')[0].src;
         // Se verifica si hubo un cambio de color en el producto
@@ -58,7 +71,7 @@ const renderCarrito = () => {
                         />
                     </svg>
                 </button>
-                <p class="carrito__producto-precio">$500.00</p>
+                <p class="carrito__producto-precio">${formatearMoneda.format( productoCarrito.precio * productoCarrito.cantidad)}</p>
             </div>
         `;
         
