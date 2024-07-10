@@ -90,7 +90,7 @@ const btnAgregarCarrito = document.getElementById('agregar-al-carrito');
 // Se obtiene el producto actual
 const producto = document.getElementById("producto");
 // Arreglo que contiene los productos del carrito
-const carrito = [];
+let carrito = [];
 // Clase que de formato al tipo de moneda que se maneja
 const formatearMoneda = new Intl.NumberFormat('es-MX', {style: 'currency', currency: 'MXN'});
 
@@ -180,6 +180,7 @@ botonesCerrarCarrito.forEach((boton) => {
     // Evento para los botones que cerrarán el carrito
     boton.addEventListener('click', (e) =>{
         // Llamada a la función que cierra el carrito
+        console.log('Entra');
         ventanaCarrito.classList.remove('carrito--active');
     });
 });
@@ -226,4 +227,23 @@ btnAgregarCarrito.addEventListener('click', (e) => {
             tamaño: tamaño,
         });
     }
+}); 
+
+// Botones para eliminar producto del carrito
+ventanaCarrito.addEventListener('click', (e) => {
+    // Se busca el botón mas cercano con la acción de eliminar al cual se le dio click
+    if(e.target.closest('button')?.dataset.accion == 'eliminar-item-carrito') {
+        // Se obtiene el producto al que se le dio click de eliminar
+        const producto = e.target.closest('.carrito__producto');
+        // se busca el index, obteniendo la lista de productos, convirtiendolo a un array obteniendo el index de dicho producto
+        const indexProducto = [...ventanaCarrito.querySelectorAll('.carrito__producto')].indexOf(producto);
+
+        // Se crea un nuevo arreglo filtrando los elementos que tengan el indice diferente del encontrado
+        carrito = carrito.filter((item, index) => {
+            if(index !== indexProducto) {
+                return item;
+            }
+        });
+    }
+    renderCarrito();
 });
