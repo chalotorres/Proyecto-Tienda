@@ -1,21 +1,21 @@
 'use strict';
 
 // Obtenemos el elemento producto
-const producto = document.getElementById('producto');
+const producto$1 = document.getElementById('producto');
 // Obtenemos especificamente el elemento de la imagen de producto
-const productoImagen = producto.querySelector('.producto__imagen');
+const productoImagen = producto$1.querySelector('.producto__imagen');
 // obtenemos las thumbs del producto
-const thumbs = producto.querySelector('.producto__thumbs');
+const thumbs = producto$1.querySelector('.producto__thumbs');
 
 // Obtenemos la parte de la selección de color
-const propiedadColor = producto.querySelector('#propiedad-color');
+const propiedadColor = producto$1.querySelector('#propiedad-color');
 
 // obtenemos el botón de Incrementar cantidad
-const btnIncrementarCantidad = producto.querySelector('#incrementar-cantidad'); 
+const btnIncrementarCantidad = producto$1.querySelector('#incrementar-cantidad'); 
 // obtenemos el botón de Disminuir cantidad
-const btnDisminuirCantidad = producto.querySelector('#disminuir-cantidad'); 
+const btnDisminuirCantidad = producto$1.querySelector('#disminuir-cantidad'); 
 // obtenemos el input de la cantidad
-const inputCantidad = producto.querySelector('#cantidad');
+const inputCantidad = producto$1.querySelector('#cantidad');
 
 // FUNCIONALIDAD DE LAS THUMBSNAILS
 // Se crea un evento click a las thumbs
@@ -62,6 +62,10 @@ btnDisminuirCantidad.addEventListener('click', (e) => {
 const botonesAbrirCarrito = document.querySelectorAll('[data-accion="abrir-carrito"]');
 // Se obtienen todos los elementos que tienen la acción de cerrar carrito
 const botonesCerrarCarrito = document.querySelectorAll('[data-accion="cerrar-carrito"]');
+// Se obtiene el botón que agrega productos al carrito
+const btnAgregarCarrito = document.getElementById('agregar-al-carrito');
+// Se obtiene el producto actual
+const producto = document.getElementById("producto");
 
 // variable que obtiene la ventana del carrito
 const ventanaCarrito = document.getElementById('carrito');
@@ -87,4 +91,14 @@ botonesCerrarCarrito.forEach((boton) => {
         // Llamada a la función que cierra el carrito
         ventanaCarrito.classList.remove('carrito--active');
     });
+});
+
+// Funcionalidad para agregar productos al carrito
+btnAgregarCarrito.addEventListener('click', (e) => {
+    // -- Valores del producto
+    producto.dataset.productoId;
+    producto.querySelector('.producto__nombre').innerText;
+    parseInt(producto.querySelector('#cantidad').value);
+    producto.querySelector('#propiedad-color input:checked').value;
+    producto.querySelector('#propiedad-tamaño input:checked').value;
 });
