@@ -113,12 +113,37 @@ btnAgregarCarrito.addEventListener('click', (e) => {
     const color = producto.querySelector('#propiedad-color input:checked').value;
     const tamaño = producto.querySelector('#propiedad-tamaño input:checked').value;
 
-    // Se agrega el producto con sus valores al carrito
-    carrito.push({
-        id: id,
-        nombre: nombre,
-        cantidad: cantidad,
-        color: color,
-        tamaño: tamaño,
-    });
+    if(carrito.length > 0) {
+        let productoEnCarrito = false;
+        
+        // Para cada item de carrito
+        carrito.forEach((item) => {
+            // Se busca que haya valores exactamente iguales 
+            if(item.id === id && item.nombre === nombre && item.color === color && item.tamaño === tamaño) {
+                // De ser así el producto ya había sido agregado, solo se aumenta la cantidad
+                item.cantidad += cantidad;    
+                productoEnCarrito = true;  
+            }
+        });
+        // Si no, se agrega el nuevo producto
+        if(!productoEnCarrito) {
+            // Se agrega el producto con sus valores al carrito
+            carrito.push({
+            id: id,
+            nombre: nombre,
+            cantidad: cantidad,
+            color: color,
+            tamaño: tamaño,
+        });
+        }
+    }else {
+        // Se agrega el producto con sus valores al carrito
+        carrito.push({
+            id: id,
+            nombre: nombre,
+            cantidad: cantidad,
+            color: color,
+            tamaño: tamaño,
+        });
+    }
 }); 
